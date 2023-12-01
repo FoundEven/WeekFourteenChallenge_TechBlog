@@ -1,0 +1,19 @@
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <h2 for="title">Title:</h2>
+            <input class="form-input" type="text" id="title" placeholder={{post.title}} />
+        </div>
+        <h2 for="description">Description:</h2>
+        <input class="form-input" type="text" id="description" placeholder={{post.description}}/>
+    </div>
+    <div class="container-fluid">
+        <p>
+            Post made by: {{user.username}}
+        </p>
+    </div>
+</div>
+<button id="Update">Update</button>
+<button id="Delete">Delete</button>
+
+<script src="/js/update.js"></script>
