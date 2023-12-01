@@ -27,4 +27,3 @@ document.querySelector("#login").addEventListener("click", gotoLogin);
 document.querySelector("#post").addEventListener("click", makePost);
 
 document.querySelector(".postit").addEventListener("click", viewPost);
-
