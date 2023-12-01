@@ -5,13 +5,13 @@ const withAuth = require("../utils/auth");
 router.get("/", async (req, res) => {
   try {
     const userData = await Post.findAll({
-      include: [{ model: User }],
+      include: [{ model: User, attributes: ["username"] }],
     });
 
-    const users = userData.map((project) => project.get({ plain: true }));
+    const posts = userData.map((post) => post.get({ plain: true }));
     res.render("homepage", {
-      users,
-
+      posts,
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -21,14 +21,31 @@ router.get("/", async (req, res) => {
 router.get("/post", async (req, res) => {
   try {
     const userData = await Post.findAll({
-      include: [{ model: User }],
+      include: [{ model: User, attributes: ["username"] }],
     });
 
-    const users = userData.map((project) => project.get({ plain: true }));
+    const posts = userData.map((project) => project.get({ plain: true }));
     res.render("postView", {
-      users,
+      posts,
 
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/update", async (req, res) => {
+  try {
+    const userData = await Post.findAll({
+      include: [{ model: User, attributes: ["username"] }],
+    });
+
+    const posts = userData.map((project) => project.get({ plain: true }));
+    res.render("update", {
+      posts,
+
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -38,7 +55,7 @@ router.get("/post", async (req, res) => {
 router.get("/view", async (req, res) => {
   try {
     const userData = await Post.findAll({
-      include: [{ model: User }],
+      include: [{ model: User, attributes: ["username"] }],
     });
 
     const users = userData.map((project) => project.get({ plain: true }));

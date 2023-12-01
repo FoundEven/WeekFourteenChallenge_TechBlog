@@ -78,6 +78,44 @@ router.post("/post", async (req, res) => {
   }
 });
 
+router.put("/edit", async (req, res) => {
+  try {
+    const dbUserData = await Post.update(
+      {
+        title: req.body.title,
+        description: req.body.description,
+      },
+      {
+        where: {
+          id: req.body.id,
+        },
+      }
+    );
+
+    req.session.save(() => {
+      req.session.user_id = dbUserData.id;
+
+      res.status(200).json(dbUserData);
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.delete("/delete", (req, res) => {
+  // delete a category by its `id` value
+  Post.destroy({
+    where: {
+      id: req.body.id,
+    },
+  })
+    .then((deletedCata) => {
+      res.json(deletedCata);
+    })
+    .catch((err) => res.json(err));
+});
+
 // Logout
 router.post("/logout", (req, res) => {
   if (req.session.loggedIn) {

@@ -22,8 +22,8 @@ const updateto = async (event) => {
   const description = document.querySelector("#description").value.trim();
 
   if (title && description) {
-    const response = await fetch("/api/users/post", {
-      method: "POST",
+    const response = await fetch("/api/users/edit", {
+      method: "PUT",
       body: JSON.stringify({ title, description }),
       headers: { "Content-Type": "application/json" },
     });
@@ -37,13 +37,9 @@ const updateto = async (event) => {
 };
 
 const dele = async (event) => {
-  const title = document.querySelector("#title").value.trim();
-  const description = document.querySelector("#description").value.trim();
-
-  if (title && description) {
-    const response = await fetch("/api/users/post", {
-      method: "POST",
-      body: JSON.stringify({ title, description }),
+  
+    const response = await fetch("/api/users/delete", {
+      method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });
 
@@ -52,7 +48,7 @@ const dele = async (event) => {
     } else {
       alert("Failed to sign up.");
     }
-  }
+  
 };
 
 document.querySelector("#Po").addEventListener("click", post);
